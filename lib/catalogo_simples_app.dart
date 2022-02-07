@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:catalogo_simples/screens/home/home_screen.dart';
+import 'package:catalogo_simples/screens/home_screen/home_screen.dart';
 
 class CatalogoSimplesApp extends StatelessWidget {
   const CatalogoSimplesApp({Key? key}) : super(key: key);
