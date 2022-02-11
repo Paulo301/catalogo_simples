@@ -1,4 +1,3 @@
-import 'package:catalogo_simples/core/model/manga.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -17,22 +16,69 @@ class UserApi {
     contentType: "application/vnd.api+json"
   );
 
-  Future<List<Manga>> getUserFavorites(String title) async {
-    // try {
-    //   final Response response = await _dio.get("/favorites", options: options);
+  Future<List<int>> getUserFavorites(String title) async {
+    try {
+      final Response response = await _dio.get("/listar-favoritos", options: options);
       
-    //   if (response.statusCode == 200) {
-    //     final dynamic data = jsonDecode(response.data) ?? [];
+      if (response.statusCode == 200) {
+        final String data = jsonDecode(response.data) ?? [];
         
-    //     return (data['data'] as List).map((manga) => Manga.fromJson(manga)).toList();
-    //   } else {
-    //     return [];
-    //   }
-    // } on DioError catch (e) {
-    //   throw Exception(e.message);
-    // } catch (e) {
-    //   rethrow;
-    // }
-    return [];
+        return [];
+      } else {
+        return [];
+      }
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> login() async {
+    try {
+      final Response response = await _dio.get("/login", options: options);
+
+      if (response.statusCode == 200) {
+        final String data = response.data ?? [];
+
+        return "";
+      } else {
+        return "";
+      }
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addFavorite() async {
+    try {
+      final Response response = await _dio.get("/adicionar-favorito", options: options);
+
+      if (response.statusCode == 200) {
+        final String data = response.data ?? [];
+
+      }
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> removeFavorite() async {
+    try {
+      final Response response = await _dio.get("/remover-favorito", options: options);
+
+      if (response.statusCode == 200) {
+        final String data = response.data ?? [];
+
+      } 
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
