@@ -1,4 +1,3 @@
-import 'package:catalogo_simples/core/model/user_context.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -7,7 +6,7 @@ class UserApi {
   // replace by dependency injection
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://localhost:8080"
+      baseUrl: "http://192.168.0.223:8080"
     )
   );
 
@@ -46,14 +45,13 @@ class UserApi {
       final Response response = await _dio.post(
         "/login", 
         options: options,
-        data: { login, password }
+        data: { 'login': login, 'password': password }
       );
-      print("Aqui");
 
       if (response.statusCode == 200) {
-        final String data = response.data ?? [];
-
-        return "";
+        final dynamic data = jsonDecode(response.data) ?? [];
+        
+        return data['token'];
       } else {
         return "";
       }

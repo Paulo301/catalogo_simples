@@ -77,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: (){
                       _userApi.login(login, password).then((value) {
                         userContext.addToken(value);
-                        print(value);
                       });
                     }
                   );
