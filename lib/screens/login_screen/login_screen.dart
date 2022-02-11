@@ -47,8 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserContext>(builder: (context, userContext, child) {
-      return Scaffold(
+    return Scaffold(
         backgroundColor: const Color(0xFF011627),
         appBar: AppBar(
           backgroundColor: const Color(0x33070600),
@@ -67,25 +66,26 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextfieldWidget(
                 hint: "Digite sua senha", 
-                controller: _loginController,
+                controller: _passwordController,
                 marginTop: 20,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 50),
-                child: ActionButton(
-                  "Entrar", 
-                  onPressed: (){
-                    _userApi.login(login, password).then((value) => {
-                      userContext.addToken(value)
-                    });
-                  }
-                ),
+                child: Consumer<UserContext>(builder: (context, userContext, child) {
+                  return ActionButton(
+                    "Entrar", 
+                    onPressed: (){
+                      _userApi.login(login, password).then((value) {
+                        userContext.addToken(value);
+                        print(value);
+                      });
+                    }
+                  );
+                })
               )
             ],
           )
         )
       );
-    },
-    );
   }
 }

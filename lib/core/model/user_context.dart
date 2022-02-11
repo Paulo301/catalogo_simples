@@ -9,7 +9,7 @@ class UserContext extends ChangeNotifier {
 
   void addToken(String token) {
     _token = token;
-    print(_token);
+    
     notifyListeners();
   }
 

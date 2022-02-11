@@ -18,6 +18,7 @@ class TextfieldWidget extends StatelessWidget {
       margin: EdgeInsets.only(top: marginTop),
       child: TextField(
         controller: controller,
+        style: Theme.of(context).textTheme.headline1,
         decoration: InputDecoration(
           hintText: hint,
           floatingLabelBehavior: FloatingLabelBehavior.auto,

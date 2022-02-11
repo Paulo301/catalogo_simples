@@ -19,10 +19,10 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
   List<Manga> mangas = [];
 
   void doSearch() {
-    _userApi.getUserFavorites(searchText).then((value) => {
-      setState(() {
-        mangas = value;
-      })
+    _userApi.getUserFavorites(searchText).then((value) {
+      // setState(() {
+      //   mangas = value;
+      // });
     });
   }
 

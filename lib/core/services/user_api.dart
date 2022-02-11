@@ -15,14 +15,7 @@ class UserApi {
     contentType: "application/json"
   );
 
-  final optionsWithToken = Options(
-    contentType: "application/json",
-    headers: {
-      'Authorization': ""
-    } 
-  );
-
-  Future<List<int>> getUserFavorites(String token) async {
+  Future<List<String>> getUserFavorites(String token) async {
     try {
       final Response response = await _dio.get(
         "/listar-favoritos", 
@@ -55,6 +48,7 @@ class UserApi {
         options: options,
         data: { login, password }
       );
+      print("Aqui");
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
