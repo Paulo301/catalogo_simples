@@ -21,15 +21,15 @@ class UserApi {
         options: Options(
           contentType: "application/json",
           headers: {
-            'Authorization': token
+            'Authentication': token
           }
         )
       );
       
       if (response.statusCode == 200) {
-        final String data = jsonDecode(response.data) ?? [];
+        final dynamic data = jsonDecode(response.data) ?? [];
         
-        return [];
+        return data['favorites'];
       } else {
         return [];
       }
@@ -69,7 +69,7 @@ class UserApi {
         options: Options(
           contentType: "application/json",
           headers: {
-            'Authorization': token
+            'Authentication': token
           }
         ),
         data: { id }
@@ -77,6 +77,8 @@ class UserApi {
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
+
+        print(data);
       }
     } on DioError catch (e) {
       throw Exception(e.message);
@@ -92,7 +94,7 @@ class UserApi {
         options: Options(
           contentType: "application/json",
           headers: {
-            'Authorization': token
+            'Authentication': token
           }
         ),
         data: { id }
@@ -100,6 +102,8 @@ class UserApi {
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
+
+        print(data);
       } 
     } on DioError catch (e) {
       throw Exception(e.message);

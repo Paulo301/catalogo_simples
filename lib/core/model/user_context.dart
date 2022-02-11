@@ -13,6 +13,12 @@ class UserContext extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addAllFavorites(List<String> favs) {
+    _favorites.addAll(favs);
+
+    notifyListeners();
+  }
+
   void addFavorite(String id){
     if(!_favorites.contains(id)){
       _favorites.add(id);
