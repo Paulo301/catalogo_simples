@@ -72,11 +72,11 @@ class UserApi {
             'Authentication': token
           }
         ),
-        data: { id }
+        data: { 'id': id }
       );
 
       if (response.statusCode == 200) {
-        final String data = response.data ?? [];
+        final dynamic data = response.data ?? [];
 
         print(data);
       }
@@ -89,7 +89,7 @@ class UserApi {
 
   Future<void> removeFavorite(String id, String token) async {
     try {
-      final Response response = await _dio.post(
+      final Response response = await _dio.delete(
         "/remover-favorito", 
         options: Options(
           contentType: "application/json",
@@ -97,11 +97,12 @@ class UserApi {
             'Authentication': token
           }
         ),
-        data: { id }
+        data: { 'id': id}
       );
+      print("Aqui2");
 
       if (response.statusCode == 200) {
-        final String data = response.data ?? [];
+        final dynamic data = response.data ?? [];
 
         print(data);
       } 
