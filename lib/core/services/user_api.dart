@@ -28,8 +28,7 @@ class UserApi {
       
       if (response.statusCode == 200) {
         final dynamic data = jsonDecode(response.data) ?? [];
-        
-        return data['favorites'];
+        return (data['favorites'] as List).map((fav) => fav.toString()).toList();
       } else {
         return [];
       }
@@ -99,7 +98,6 @@ class UserApi {
         ),
         data: { 'id': id}
       );
-      print("Aqui2");
 
       if (response.statusCode == 200) {
         final dynamic data = response.data ?? [];

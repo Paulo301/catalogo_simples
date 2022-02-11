@@ -27,121 +27,128 @@ class _MangaDescriptionScreenState extends State<MangaDescriptionScreen> {
         centerTitle: true,
         title: const Text("Descrição"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: Row(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
                 children: [
                   Container(
-                    width: _screenWidth*0.375,
-                    height: _screenWidth*0.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      image: DecorationImage(
-                        image: NetworkImage(widget.manga.posterImage),
-                        fit: BoxFit.cover,
-                      ),
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: _screenWidth*0.375,
+                          height: _screenWidth*0.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                              image: NetworkImage(widget.manga.posterImage),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          child: Text(
+                            widget.manga.title,
+                            textAlign: TextAlign.start,
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Center(
+                      child: Consumer<UserContext>(builder: (context, userContext, child) {
+                        if(userContext.favorites.contains(widget.manga.id)){
+                          return TextButton(
+                            onPressed: (){
+                              _userApi.removeFavorite(widget.manga.id, userContext.token).then((value) {
+                                  userContext.removeFavorite(widget.manga.id);
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      title: const Text('Alerta'),
+                                      content: const Text('Manga removido do catálogo'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context, "OK"),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              );
+                            }, 
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.favorite,
+                                  color: const Color(0xFFFDFFFC),
+                                  size: MediaQuery.of(context).size.width * 0.07,
+                                ),
+                                Text(
+                                  "Remover do catálogo",
+                                  style: Theme.of(context).textTheme.headline2,
+                                )
+                              ],
+                            )
+                          );
+                        } else {
+                          return TextButton(
+                            onPressed: (){
+                              _userApi.addFavorite(widget.manga.id, userContext.token).then((value) {
+                                  userContext.addFavorite(widget.manga.id);
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      title: const Text('Alerta'),
+                                      content: const Text('Manga adicionado ao catálogo'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context, "OK"),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              );
+                            }, 
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.favorite_outline,
+                                  color: const Color(0xFFFDFFFC),
+                                  size: MediaQuery.of(context).size.width * 0.07,
+                                ),
+                                Text(
+                                  "Adicionar ao catálogo",
+                                  style: Theme.of(context).textTheme.headline2,
+                                )
+                              ],
+                            )
+                          );
+                        }
+                      })
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 15),
+                    margin: const EdgeInsets.only(top: 15),
+                    padding: const EdgeInsets.only(bottom: 15),
                     child: Text(
-                      widget.manga.title,
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.headline3,
+                      widget.manga.synopsis,
+                      style: Theme.of(context).textTheme.headline1,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Center(
-                child: Consumer<UserContext>(builder: (context, userContext, child) {
-                  if(userContext.favorites.contains(widget.manga.id)){
-                    return TextButton(
-                      onPressed: (){
-                        _userApi.removeFavorite(widget.manga.id, userContext.token).then((value) {
-                            userContext.removeFavorite(widget.manga.id);
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                title: const Text('Alerta'),
-                                content: const Text('Manga removido do catálogo'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context, "OK"),
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        );
-                      }, 
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.favorite,
-                            color: const Color(0xFFFDFFFC),
-                            size: MediaQuery.of(context).size.width * 0.07,
-                          ),
-                          Text(
-                            "Remover do catálogo",
-                            style: Theme.of(context).textTheme.headline2,
-                          )
-                        ],
-                      )
-                    );
-                  } else {
-                    return TextButton(
-                      onPressed: (){
-                        _userApi.addFavorite(widget.manga.id, userContext.token).then((value) {
-                            userContext.addFavorite(widget.manga.id);
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                title: const Text('Alerta'),
-                                content: const Text('Manga adicionado ao catálogo'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context, "OK"),
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        );
-                      }, 
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.favorite_outline,
-                            color: const Color(0xFFFDFFFC),
-                            size: MediaQuery.of(context).size.width * 0.07,
-                          ),
-                          Text(
-                            "Adicionar ao catálogo",
-                            style: Theme.of(context).textTheme.headline2,
-                          )
-                        ],
-                      )
-                    );
-                  }
-                })
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: Text(
-                widget.manga.synopsis,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-            )
           ],
         ),
       ),

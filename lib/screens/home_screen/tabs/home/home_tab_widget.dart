@@ -1,5 +1,6 @@
 import 'package:catalogo_simples/core/model/manga.dart';
 import 'package:catalogo_simples/core/model/user_context.dart';
+import 'package:catalogo_simples/core/services/manga_api.dart';
 import 'package:catalogo_simples/core/services/user_api.dart';
 import 'package:catalogo_simples/core/widgets/manga_card.dart';
 import 'package:catalogo_simples/core/widgets/search_bar_widget.dart';
@@ -16,6 +17,7 @@ class HomeTabWidget extends StatefulWidget {
 class _HomeTabWidgetState extends State<HomeTabWidget> {
   final TextEditingController _searchController = TextEditingController();
   final UserApi _userApi = UserApi();
+  final MangaApi _mangaApi = MangaApi();
 
   String searchText = "";
   List<String> favorites = [];
@@ -43,7 +45,17 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
         setState(() {
           favorites = value;
         });
+        
         _userContext.addAllFavorites(value);
+        if(value.isNotEmpty){
+          _mangaApi.getMangaListById(value).then((valueByIds) {
+            setState(() {
+              mangas = valueByIds;
+              filteredMangas = valueByIds;
+            });
+          });
+        }
+        
       });
     } 
 
