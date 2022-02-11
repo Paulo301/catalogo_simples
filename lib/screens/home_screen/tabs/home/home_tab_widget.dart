@@ -20,7 +20,6 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
   final MangaApi _mangaApi = MangaApi();
 
   String searchText = "";
-  List<String> favorites = [];
   List<Manga> mangas = [];
   List<Manga> filteredMangas = [];
 
@@ -42,10 +41,6 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
     
     if(_userContext.token != ""){
       _userApi.getUserFavorites(_userContext.token).then((value) {
-        setState(() {
-          favorites = value;
-        });
-        
         _userContext.addAllFavorites(value);
         if(value.isNotEmpty){
           _mangaApi.getMangaListById(value).then((valueByIds) {
@@ -89,21 +84,30 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
               margin: const EdgeInsets.only(top: 10.0),
               child: Consumer<UserContext>(builder: (context, userContext, child) {
                 if(userContext.token != ""){
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    childAspectRatio: 0.75,
-                    children: filteredMangas
-                                .asMap()
-                                .entries
-                                .map((manga) => (
-                                  MangaCard(
-                                    manga: manga.value,
-                                  )
-                                )).toList()
+                  if(userContext.favorites.isNotEmpty){
+                    return GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 15,
+                      childAspectRatio: 0.75,
+                      children: filteredMangas
+                                  .asMap()
+                                  .entries
+                                  .map((manga) => (
+                                    MangaCard(
+                                      manga: manga.value,
+                                    )
+                                  )).toList()
+                    );
+                  } else {
+                    return Center(
+                    child: Text(
+                      'Sem favoritos cadastrados',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
                   );
+                  }
                 } else {
                   return Center(
                     child: Text(
