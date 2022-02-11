@@ -2,7 +2,6 @@ import 'package:catalogo_simples/screens/home_screen/tabs/config/config_tab_widg
 import 'package:catalogo_simples/screens/home_screen/tabs/home/home_tab_widget.dart';
 import 'package:catalogo_simples/screens/home_screen/tabs/search/search_tab_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:catalogo_simples/core/widgets/action_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,12 +13,14 @@ class HomeScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: const Color(0xFF011627),
-        body: const TabBarView(
-          children: [
-            HomeTabWidget(),
-            SearchTabWidget(),
-            ConfigTabWidget(),
-          ],
+        body: const SafeArea(
+          child: TabBarView(
+            children: [
+              HomeTabWidget(),
+              SearchTabWidget(),
+              ConfigTabWidget(),
+            ],
+          ),
         ),
         bottomNavigationBar: Container(
           color: const Color(0x33070600),

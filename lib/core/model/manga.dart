@@ -16,10 +16,10 @@ class Manga {
   factory Manga.fromJson(Map<String, dynamic> json) {
     return Manga(
       id: json['id'],
-      linkSelf: json['linkSelf'],
-      title: json['title'],
-      synopsis: json['synopsis'],
-      posterImage: json['posterImage']
+      linkSelf: json['links']["self"],
+      title: json['attributes']['canonicalTitle'],
+      synopsis: json['attributes']['synopsis'],
+      posterImage: json['attributes']['posterImage']['original']
     );
   }
 

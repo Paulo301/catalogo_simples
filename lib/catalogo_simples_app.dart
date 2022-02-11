@@ -17,14 +17,14 @@ class CatalogoSimplesApp extends StatelessWidget {
         primaryColor: const Color(0xFF2EC4B6),
         textTheme: const TextTheme(
           headline1: TextStyle(
-            color: Color(0xFFFDFFFC),
-            fontWeight: FontWeight.bold,
-            fontSize: 36
+            color: Color(0xFFF7F7FF),
+            fontWeight: FontWeight.w400,
+            fontSize: 16
           ),
           headline2: TextStyle(
-            color: Color(0xFFFDFFFC),
+            color: Color(0xFFF7F7FF),
             fontWeight: FontWeight.w400,
-            fontSize: 26
+            fontSize: 14
           ),
           button: TextStyle(
             color: Color(0xFFFDFFFC),
