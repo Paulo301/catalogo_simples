@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     _loginController.dispose();
-    _loginController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -77,6 +77,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: (){
                       _userApi.login(login, password).then((value) {
                         userContext.addToken(value);
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Alerta'),
+                            content: const Text('Login realizado com sucesso'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.popUntil(context, ModalRoute.withName('/')),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
                       });
                     }
                   );
