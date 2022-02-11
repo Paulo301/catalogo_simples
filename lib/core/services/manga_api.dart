@@ -34,15 +34,4 @@ class MangaApi {
       rethrow;
     }
   }
-  // Future<void> getMangaListByTitle(String title) async {
-  //   final Response response = await _dio.get("/manga?filter[text]="+title, options: options);
-  //   final dynamic data = jsonDecode(response.data) ?? [];
-  //   (data['data'] as List).forEach((element) {
-  //     print(element['id']);
-  //     print(element['links']["self"]);
-  //     print(element['attributes']['canonicalTitle']);
-  //     // print(element['attributes']['synopsis']);
-  //     print(element['attributes']['posterImage']['original']);
-  //   });
-  // }
 }

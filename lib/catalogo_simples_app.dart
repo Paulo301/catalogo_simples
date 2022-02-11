@@ -7,7 +7,7 @@ class CatalogoSimplesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Racha Conta",
+      title: "Catalogo simples",
       initialRoute: "/",
       routes: {
         "/": (context) => const HomeScreen(),
@@ -19,12 +19,17 @@ class CatalogoSimplesApp extends StatelessWidget {
           headline1: TextStyle(
             color: Color(0xFFF7F7FF),
             fontWeight: FontWeight.w400,
-            fontSize: 16
+            fontSize: 16,
           ),
           headline2: TextStyle(
             color: Color(0xFFF7F7FF),
             fontWeight: FontWeight.w400,
             fontSize: 14
+          ),
+          headline3: TextStyle(
+            color: Color(0xFFF7F7FF),
+            fontWeight: FontWeight.w400,
+            fontSize: 24
           ),
           button: TextStyle(
             color: Color(0xFFFDFFFC),

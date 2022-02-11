@@ -1,25 +1,26 @@
+import 'package:catalogo_simples/core/model/manga.dart';
+import 'package:catalogo_simples/screens/manga_description/manga_description_screen.dart';
 import 'package:flutter/material.dart';
 
 class MangaCard extends StatelessWidget {
-  final String id;
-  final String mangaName;
-  final String imageUrl;
+  final Manga manga;
 
   const MangaCard({ 
     Key? key,
-    required this.id,
-    required this.mangaName,
-    required this.imageUrl,
+    required this.manga
   }) : super(key: key);
-
-  void onPressed(){
-
-  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: onPressed,
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MangaDescriptionScreen(manga: manga),
+            ),
+          );
+        },
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -29,7 +30,7 @@ class MangaCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
-                    image: NetworkImage(imageUrl),
+                    image: NetworkImage(manga.posterImage),
                     fit: BoxFit.cover,
                   ),
                   color: Colors.transparent
@@ -64,7 +65,7 @@ class MangaCard extends StatelessWidget {
                 child: FractionallySizedBox(
                   widthFactor: 0.8,
                   child: Text(
-                    mangaName,
+                    manga.title,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline2,
                   ),
