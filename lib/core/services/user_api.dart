@@ -1,3 +1,4 @@
+import 'package:catalogo_simples/core/model/user_context.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -10,15 +11,28 @@ class UserApi {
     )
   );
 
-  // final _endpointBase = "https://kitsu.io/api/edge";
-
   final options = Options(
-    contentType: "application/vnd.api+json"
+    contentType: "application/json"
   );
 
-  Future<List<int>> getUserFavorites(String title) async {
+  final optionsWithToken = Options(
+    contentType: "application/json",
+    headers: {
+      'Authorization': ""
+    } 
+  );
+
+  Future<List<int>> getUserFavorites(String token) async {
     try {
-      final Response response = await _dio.get("/listar-favoritos", options: options);
+      final Response response = await _dio.get(
+        "/listar-favoritos", 
+        options: Options(
+          contentType: "application/json",
+          headers: {
+            'Authorization': token
+          }
+        )
+      );
       
       if (response.statusCode == 200) {
         final String data = jsonDecode(response.data) ?? [];
@@ -34,9 +48,13 @@ class UserApi {
     }
   }
 
-  Future<String> login() async {
+  Future<String> login(String login, String password) async {
     try {
-      final Response response = await _dio.get("/login", options: options);
+      final Response response = await _dio.post(
+        "/login", 
+        options: options,
+        data: { login, password }
+      );
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
@@ -52,13 +70,21 @@ class UserApi {
     }
   }
 
-  Future<void> addFavorite() async {
+  Future<void> addFavorite(String id, String token) async {
     try {
-      final Response response = await _dio.get("/adicionar-favorito", options: options);
+      final Response response = await _dio.post(
+        "/adicionar-favorito", 
+        options: Options(
+          contentType: "application/json",
+          headers: {
+            'Authorization': token
+          }
+        ),
+        data: { id }
+      );
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
-
       }
     } on DioError catch (e) {
       throw Exception(e.message);
@@ -67,13 +93,21 @@ class UserApi {
     }
   }
 
-  Future<void> removeFavorite() async {
+  Future<void> removeFavorite(String id, String token) async {
     try {
-      final Response response = await _dio.get("/remover-favorito", options: options);
+      final Response response = await _dio.post(
+        "/remover-favorito", 
+        options: Options(
+          contentType: "application/json",
+          headers: {
+            'Authorization': token
+          }
+        ),
+        data: { id }
+      );
 
       if (response.statusCode == 200) {
         final String data = response.data ?? [];
-
       } 
     } on DioError catch (e) {
       throw Exception(e.message);
