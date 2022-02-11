@@ -1,4 +1,4 @@
-import 'package:catalogo_simples/screens/home_screen/tabs/config/config_tab_widget.dart';
+import 'package:catalogo_simples/screens/home_screen/tabs/more/more_tab_widget.dart';
 import 'package:catalogo_simples/screens/home_screen/tabs/home/home_tab_widget.dart';
 import 'package:catalogo_simples/screens/home_screen/tabs/search/search_tab_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               HomeTabWidget(),
               SearchTabWidget(),
-              ConfigTabWidget(),
+              MoreTabWidget(),
             ],
           ),
         ),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 tabs: [
                   Tab(icon: Icon(Icons.home_outlined, size: 35)),
                   Tab(icon: Icon(Icons.search_outlined, size: 35)),
-                  Tab(icon: Icon(Icons.settings_outlined, size: 35)),
+                  Tab(icon: Icon(Icons.more_horiz_outlined, size: 35)),
                 ],
                 labelColor: Color(0xFF23B5D3),
                 unselectedLabelColor: Color(0xFFF7F7FF),

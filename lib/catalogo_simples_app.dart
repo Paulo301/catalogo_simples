@@ -1,3 +1,4 @@
+import 'package:catalogo_simples/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:catalogo_simples/screens/home_screen/home_screen.dart';
 
@@ -11,6 +12,7 @@ class CatalogoSimplesApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => const HomeScreen(),
+        "/login": (context) => const LoginScreen(),
       },
       theme: ThemeData(
         brightness: Brightness.light,

@@ -7,7 +7,7 @@ class UserApi {
   // replace by dependency injection
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://localhost:3000"
+      baseUrl: "http://localhost:8080"
     )
   );
 
