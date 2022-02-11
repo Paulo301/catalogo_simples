@@ -10,8 +10,8 @@ class ActionButton extends StatelessWidget {
     this.text, 
     { 
       Key? key,
-      this.backgroundColor = const Color(0xFF2EC4B6),
-      this.foregroundColor = const Color(0xFFFDFFFC),
+      this.backgroundColor = const Color(0xFF279AF1),
+      this.foregroundColor = const Color(0xFFF7F7FF),
       required this.onPressed,
     }) : super(key: key);
 
