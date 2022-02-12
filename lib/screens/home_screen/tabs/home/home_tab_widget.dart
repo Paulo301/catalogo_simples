@@ -33,6 +33,17 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
     });
   }
 
+  void updateMangaList(List<String> favorites){
+    if(favorites.isNotEmpty){
+      _mangaApi.getMangaListById(favorites).then((valueByIds) {
+        setState(() {
+          mangas = valueByIds;
+          filteredMangas = valueByIds;
+        });
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +61,6 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
             });
           });
         }
-        
       });
     } 
 
@@ -69,7 +79,11 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
+    final UserContext _userContext = Provider.of<UserContext>(context, listen: true);
+    if(_userContext.favoritesEdited){
+      updateMangaList(_userContext.favorites);
+      _userContext.addFavoritesEdited(false);
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),

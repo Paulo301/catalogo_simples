@@ -51,10 +51,14 @@ class _MangaDescriptionScreenState extends State<MangaDescriptionScreen> {
                         ),
                         Container(
                           margin: const EdgeInsets.only(left: 15),
-                          child: Text(
-                            widget.manga.title,
-                            textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.headline3,
+                          width: _screenWidth*0.375,
+                          height: _screenWidth*0.5,
+                          child: Center(
+                            child: Text(
+                              widget.manga.title,
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
                           ),
                         ),
                       ],

@@ -1,6 +1,5 @@
 import 'package:catalogo_simples/core/model/manga.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'dart:convert';
 
 class MangaApi {
